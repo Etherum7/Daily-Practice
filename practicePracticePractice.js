@@ -124,7 +124,7 @@ function maxSum(arr, num) {
 //   "Scott", "Jennifer" ]
 
 function sortNamesByLength(arr) {
-	let pureBuckets = [];
+	var pureBuckets = [];
 	if (arr.length == 0) return 'empty array';
 	{
 		let buckets = [];
