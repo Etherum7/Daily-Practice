@@ -110,3 +110,45 @@ function maxSum(arr, num) {
 // console.log(maxSum([ 0, 1, 6, 90 ], 2));
 // console.log(maxSum([ -2, -3, 90, 1000, -232, 10000 ], 3));
 // console.log(maxSum([ -2, -3, 90, 1000, -232, 10000 ], 8));
+
+// 6 sortNamesByLength also executing POLE
+// sortNamesByLength([
+//     "Sally",
+//     "Suzy",
+//     "Frank",
+//     "John",
+//     "Jennifer",
+//     "Scott"
+// ]);
+// [ "John", "Suzy", "Frank", "Sally",
+//   "Scott", "Jennifer" ]
+
+function sortNamesByLength(arr) {
+	let pureBuckets = [];
+	if (arr.length == 0) return 'empty array';
+	{
+		let buckets = [];
+		//[['scott', 'frank'],['franky', 'scitty']];
+		for (let name of arr) {
+			if (buckets[name.length] == null) {
+				buckets[name.length] = [];
+			}
+			buckets[name.length].push(name);
+		}
+
+		for (let bucket of buckets) {
+			if (bucket) {
+				pureBuckets.push(bucket);
+			}
+		}
+	}
+	{
+		let sortedNames = [];
+		for (let bucket of pureBuckets) {
+			sortedNames.push(...bucket.sort().map((name) => name));
+		}
+		return sortedNames;
+	}
+}
+// console.log(sortNamesByLength([ 'Sally', 'Suzy', 'Frank', 'John', 'Jennifer', 'Scott' ]));
+// console.log(sortNamesByLength([]));
