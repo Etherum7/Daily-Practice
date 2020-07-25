@@ -1,4 +1,5 @@
 //    1
+'use strict';
 function sameArr(arr1, arr2) {
 	if (arr1.length !== arr2.length) return false;
 	let freqCounter1 = {};
@@ -44,7 +45,7 @@ function checkAnagram(str1, str2) {
 // console.log(checkAnagram('awesome', 'awesom'));
 //    3
 function sumZero(sortedArr) {
-	if (sortedArr.length < 2) return undefined;
+	if (sortedArr.length < 1) return undefined;
 	let [ i, j ] = [ 0, sortedArr.length - 1 ];
 
 	while (i < j) {
@@ -58,7 +59,7 @@ function sumZero(sortedArr) {
 	}
 	return undefined;
 }
-// console.log(sumZero([ -1, 0, 1, 2 ]));
+// console.log(sumZero([ -1, 0, 1,2 ]));
 // console.log(sumZero([ 0, 1 ]));
 // console.log(sumZero([ 0 ]));
 // console.log(sumZero([ -3, -2, 0, 1, 2, 3 ]));
@@ -150,5 +151,33 @@ function sortNamesByLength(arr) {
 		return sortedNames;
 	}
 }
-// console.log(sortNamesByLength([ 'Sally', 'Suzy', 'Frank', 'John', 'Jennifer', 'Scott' ]));
+// console.log(
+// 	sortNamesByLength([ 'Sally', 'Suzy', 'Frank', 'John', 'Jennifer', 'Scott' ])
+// );
 // console.log(sortNamesByLength([]));
+//'Fira Code iScript', 'Fira Code',
+
+// 6 Divide And conquer Searchong in an array
+function binarySearch(arr, num) {
+	if (arr.length === 0) return 'empty array';
+	if (arr.length === 1 && arr[0] === num) return 0;
+	let [ first, last ] = [ 0, arr.length - 1 ];
+	if (arr[last] === num) return last;
+
+	while (first < last) {
+		let middle = Math.floor((first + last) / 2);
+		if (num > arr[middle]) {
+			first = middle;
+		}
+		else if (num < arr[middle]) {
+			last = middle;
+		}
+		else if (num === arr[middle]) return middle;
+	}
+
+	return -1;
+}
+console.log(binarySearch([ -1, 0, 1, 1, 2, 3, 5, 6 ], 5));
+console.log(binarySearch([ 0, 1, 6, 90 ], 0));
+console.log(binarySearch([ -2, -3, 90, 1000, -232, 10000 ], 90));
+console.log(binarySearch([ -2, -3, 90, 1000, -232, 10000 ], 10000));
