@@ -178,7 +178,18 @@ function binarySearch(arr, num) {
 
 	return -1;
 }
-console.log(binarySearch([ -1, 0, 1, 1, 2, 3, 5, 6 ], 5));
-console.log(binarySearch([ 0, 1, 6, 90 ], 0));
-console.log(binarySearch([ -2, -3, 90, 1000, -232, 10000 ], 90));
-console.log(binarySearch([ -2, -3, 90, 1000, -232, 10000 ], 10000));
+// console.log(binarySearch([ -1, 0, 1, 1, 2, 3, 5, 6 ], 5));
+// console.log(binarySearch([ 0, 1, 6, 90 ], 0));
+// console.log(binarySearch([ -2, -3, 90, 1000, -232, 10000 ], 90));
+// console.log(binarySearch([ -2, -3, 90, 1000, -232, 10000 ], 10000));
+
+// 7 areThereDuplicates
+function areThereDuplicates(...args) {
+	let counter = {};
+	for (let i of args) {
+		counter[i] = (counter[i] || 0) + 1;
+		if (counter[i] > 1) return true;
+	}
+	return false;
+}
+//console.log(areThereDuplicates(1, 2, 3, 2));
