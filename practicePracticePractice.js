@@ -162,17 +162,18 @@ function binarySearch(arr, num) {
 	if (arr.length === 0) return 'empty array';
 	if (arr.length === 1 && arr[0] === num) return 0;
 	let [ first, last ] = [ 0, arr.length - 1 ];
-	if (arr[last] === num) return last;
+	//if (arr[last] === num) return last;
+	//or
 
-	while (first < last) {
+	while (first <= last) {
 		let middle = Math.floor((first + last) / 2);
 		if (num > arr[middle]) {
-			first = middle;
+			first = middle + 1;
 		}
 		else if (num < arr[middle]) {
-			last = middle;
+			last = middle - 1;
 		}
-		else if (num === arr[middle]) return middle;
+		else return middle;
 	}
 
 	return -1;
