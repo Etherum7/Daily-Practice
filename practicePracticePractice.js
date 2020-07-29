@@ -183,7 +183,7 @@ function binarySearch(arr, num) {
 // console.log(binarySearch([ -2, -3, 90, 1000, -232, 10000 ], 90));
 // console.log(binarySearch([ -2, -3, 90, 1000, -232, 10000 ], 10000));
 
-// 7 areThereDuplicates
+// 7 areThereDuplicates by frequencyCounter
 function areThereDuplicates(...args) {
 	let counter = {};
 	for (let i of args) {
@@ -193,3 +193,41 @@ function areThereDuplicates(...args) {
 	return false;
 }
 //console.log(areThereDuplicates(1, 2, 3, 2));
+// 8 areThereDuplicates by multiplePointer
+function areThereDuplicates1(...args) {
+	args = args.sort((a, b) => a - b);
+	let [ i, j ] = [ 0, 1 ];
+	while (j < args.length) {
+		if (args[i] !== args[j]) {
+			i++;
+			j++;
+		}
+		else {
+			return true;
+		}
+	}
+	return false;
+}
+
+//console.log(areThereDuplicates());
+
+// 9 averagePair by multiple Pointer
+function averagePair(arr, num) {
+
+	//arr is sorted
+	let [ i, j ] = [ 0, arr.length - 1 ];
+	while (i < j) {
+		let average = (arr[i] + arr[j]) / 2;
+		if (average < num) {
+			i++;
+		}
+		else if (average > num) {
+			j--;
+		}
+		else {
+			return num !== undefined ;
+		}
+	}
+	return false;
+}
+console.log(averagePair([1,2,3],2));
