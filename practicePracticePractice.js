@@ -213,7 +213,6 @@ function areThereDuplicates1(...args) {
 
 // 9 averagePair by multiple Pointer
 function averagePair(arr, num) {
-
 	//arr is sorted
 	let [ i, j ] = [ 0, arr.length - 1 ];
 	while (i < j) {
@@ -225,9 +224,54 @@ function averagePair(arr, num) {
 			j--;
 		}
 		else {
-			return num !== undefined ;
+			return num !== undefined;
 		}
 	}
 	return false;
 }
-console.log(averagePair([1,2,3],2));
+//console.log(averagePair([1,2,3],2));
+// is Subsequence Multiple Pointer
+function isSubsequence(str1, str2) {
+	let ptr1 = 0;
+	let ptr2 = 0;
+	while (ptr2 < str2.length) {
+		if (str1[ptr1] === str2[ptr2]) {
+			ptr1 += 1;
+			ptr2 += 1;
+		}
+		else {
+			ptr2 += 1;
+		}
+	}
+	if (ptr1 === str1.length && ptr1 !== 0) {
+		return true;
+	}
+	return false;
+}
+//console.log(isSubsequence('hel', 'hello'));
+// maxSubArraySum sliding Window
+function maxSubArraySum(arr, num) {
+	if (num === 0 || arr.length < num) return 0;
+	let temp = 0;
+	let [ first, second ] = [ 0, num ];
+	for (let i = 0; i < num; i++) {
+		temp += arr[i];
+	}
+	let max = temp;
+	let i;
+	while (second < arr.length) {
+		temp = temp + arr[second] - arr[first];
+		first++;
+		if (temp > max) {
+			i = first;
+			max = temp;
+		}
+
+		second++;
+		console.log(i, 'i');
+		console.log(temp, 'temp');
+		console.log(max, 'max');
+	}
+	return arr.slice(i, i + num);
+}
+console.log(maxSubArraySum([], 9));
