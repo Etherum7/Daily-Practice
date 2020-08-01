@@ -230,7 +230,7 @@ function averagePair(arr, num) {
 	return false;
 }
 //console.log(averagePair([1,2,3],2));
-// is Subsequence Multiple Pointer
+// 10 is Subsequence Multiple Pointer
 function isSubsequence(str1, str2) {
 	let ptr1 = 0;
 	let ptr2 = 0;
@@ -249,7 +249,7 @@ function isSubsequence(str1, str2) {
 	return false;
 }
 //console.log(isSubsequence('hel', 'hello'));
-// maxSubArraySum sliding Window
+//* 11 maxSubArraySum sliding Window
 function maxSubArraySum(arr, num) {
 	if (num === 0 || arr.length < num) return 0;
 	let temp = 0;
@@ -268,10 +268,122 @@ function maxSubArraySum(arr, num) {
 		}
 
 		second++;
-		console.log(i, 'i');
-		console.log(temp, 'temp');
-		console.log(max, 'max');
+		// console.log(i, 'i');
+		// console.log(temp, 'temp');
+		// console.log(max, 'max');
 	}
 	return arr.slice(i, i + num);
 }
-console.log(maxSubArraySum([], 9));
+// console.log(maxSubArraySum([], 9));
+
+//TODO: Optimizations 12 LongestSubstringWithUniqueCharecters returns length
+function findLongestSubstring(str) {
+	if (str.length > 0) {
+		let [ first, second ] = [ 0, 1 ];
+		let subStr = str[first];
+		let subStrLen = 1;
+		while (second < str.length) {
+			if (!subStr.includes(str[second])) {
+				subStr = subStr.concat(str[second]);
+				subStrLen =
+					subStr.length > subStrLen ? subStr.length : subStrLen;
+			}
+			else {
+				subStr = subStr
+					.slice(subStr.indexOf(str[second]) + 1)
+					.concat(str[second]);
+				first++;
+			}
+			second++;
+			console.log(subStr);
+		}
+		return subStrLen;
+	}
+}
+//console.log(findLongestSubstring('thisishowwedoit'));
+// *12 minSubArrayLen slidingWindow
+// ! My Code 😢🤣 4 ghante mehnet karne ke liye thanks vasudev shri vishnu.
+// function minSubArrayLen(arr, num) {
+// 	//    if(arr.length===1 && arr[0]>=num) return 1;
+// 	//    else return
+
+// 	if (arr.includes(num)) return 1;
+// 	if (arr.length > 1) {
+// 		let [ first, second ] = [ 0, 1 ];
+// 		let initSum = arr[0];
+// 		while (initSum < num && second < arr.length) {
+// 			initSum += arr[second];
+// 			if (initSum < num) {
+// 				second++;
+// 			}
+// 		}
+// 		if (initSum<num) {
+// 			return 'Not Possible';
+// 		}
+// 		let minLen = second + 1;
+// 		while (second < arr.length) {
+// 			if (initSum - arr[first] >= num) {
+// 				initSum = initSum - arr[first];
+// 				first++;
+// 				minLen = minLen - 1;
+// 			}
+// 			else {
+// 				initSum = initSum - arr[first] + arr[second];
+// 				if (initSum >= num) {
+// 					// && second - first + 1 <= minLen
+// 					//minLen = second - first + 1;
+// 					first++;
+// 					second++;
+// 				}
+// 				else {
+// 					second++;
+// 				}
+// 			}
+// 			//console.log(minLen)
+// 		}
+
+// 		return minLen;
+// 	}
+// 	else if (arr[0] >= num) {
+// 		return 1;
+// 	}
+// 	else if (arr[0] < num) {
+// 		return 'Nothing';
+// 	}
+// 	else {
+// 		return 'empty array';
+// 	}
+// }
+// console.log(minSubArrayLen([ 1, 3, 7, 4, 2, 7, 10 ], 5));
+
+//*12 minSubArrayLen sliding Window
+minSubArrayLen Solution
+function minSubArrayLen(nums, sum) {
+  let total = 0;
+  let start = 0;
+  let end = 0;
+  let minLen = Infinity;
+ 
+  while (start < nums.length) {
+    // if current window doesn't add up to the given sum then 
+		// move the window to right
+    if(total < sum && end < nums.length){
+      total += nums[end];
+			end++;
+    }
+    // if current window adds up to at least the sum given then
+		// we can shrink the window 
+    else if(total >= sum){
+      minLen = Math.min(minLen, end-start);
+			total -= nums[start];
+			start++;
+    } 
+    // current total less than required total but we reach the end, need this or else we'll be in an infinite loop 
+    else {
+      break;
+    }
+  }
+ 
+  return minLen === Infinity ? 0 : minLen;
+}
+console.log(minSubArrayLen([ 1, 3, 7, 4, 2, 7, 10 ], 5));
